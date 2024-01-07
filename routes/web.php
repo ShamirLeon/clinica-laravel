@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DoctorsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'welcome')->name('home');
+Route::get('/doctors',[DoctorsController::class, 'index'])->name('doctors');
+Route::get('/doctor/create',[DoctorsController::class, 'create'])->name('doctors.create'); 
+Route::post('/doctors',[DoctorsController::class, 'store'])->name('doctors.store');
+Route::get('/doctor/{doctor}',[DoctorsController::class, 'show']);
+Route::view('/patients', 'patients')->name('patients');
